@@ -1,5 +1,3 @@
-
-
 public class UserServices {
     private UserDAO userDAO;
 
