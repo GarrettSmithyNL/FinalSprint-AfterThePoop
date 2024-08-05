@@ -2,7 +2,7 @@ import java.sql.*;
 public class DBConnection {
   private static final String URL = "jdbc:postgresql://localhost:5432/AfterThePoop";
   private static final String USER = "postgres";
-  private static final String PASSWORD = ""; // Your Password here!
+  private static final String PASSWORD = "Lilly"; // Your Password here!
 
   public static Connection getConnection() {
     Connection connection = null;
