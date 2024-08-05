@@ -1,3 +1,5 @@
+import static java.lang.StringTemplate.STR;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -120,5 +122,29 @@ public class UserDAO implements DAO<User> {
     } catch (SQLException e) {
       System.out.println(STR."Error: \{e.getMessage()}");
     }
+  }
+
+  public User getByEmail(String email) {
+    User user = null;
+    final String query = "SELECT * FROM users WHERE email = ?";
+    try {
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, email);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            user = new User();
+            user.setUserId(resultSet.getInt("user_id"));
+            user.setAddressId(resultSet.getInt("address_id"));
+            user.setCompanyId(resultSet.getInt("company_id"));
+            user.setUserName(resultSet.getString("user_name"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPassword(resultSet.getString("password"));
+            user.setUserPhone(resultSet.getString("user_phone"));
+            user.setAdmin(resultSet.getBoolean("is_admin"));
+        }
+    } catch (SQLException e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+    return user;
   }
 }
