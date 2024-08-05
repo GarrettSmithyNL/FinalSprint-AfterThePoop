@@ -1,3 +1,8 @@
+package users;
+
+import users.User;
+import utility.*;
+
 import static java.lang.StringTemplate.STR;
 
 import java.sql.*;
@@ -46,7 +51,7 @@ public class UserDAO implements DAO<User> {
   }
 
   public final User getById(int id) {
-    // User object to store the result
+    // users.User object to store the result
     User user = new User();
     // SQL query to get a user by id
     final String query = "SELECT * FROM users WHERE user_id = ?";

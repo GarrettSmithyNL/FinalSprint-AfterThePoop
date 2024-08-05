@@ -1,3 +1,5 @@
+package utility;
+
 import java.util.ArrayList;
 public interface DAO<T> {
   ArrayList<T> getAll();

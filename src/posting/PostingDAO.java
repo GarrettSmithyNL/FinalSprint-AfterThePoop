@@ -1,9 +1,13 @@
+package posting;
+
+import utility.*;
 import java.sql.*;
 import java.util.ArrayList;
-public class PostingsDAO implements DAO<Posting>{
+
+public class PostingDAO implements DAO<Posting> {
   private Connection connection;
 
-  public PostingsDAO() {
+  public PostingDAO() {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {

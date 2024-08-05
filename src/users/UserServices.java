@@ -1,3 +1,7 @@
+package users;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 public class UserServices {
     private UserDAO userDAO;
 
@@ -8,7 +12,7 @@ public class UserServices {
     // Handles authentication (READ)
     public boolean authenticate(String email, String password) {
         User user = userDAO.getByEmail(email);
-        return user != null && user.getPassword().equals(password);
+        return user != null && BCrypt.checkpw(password, user.getPassword());
     }
 
     // Registration (CREATE)
@@ -25,7 +29,7 @@ public class UserServices {
     public void resetPassword(String email, String newPassword) {
         User user = userDAO.getByEmail(email);
         if (user != null) {
-            user.setPassword(newPassword);
+            user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
             userDAO.update(user);
         }
     }

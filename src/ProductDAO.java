@@ -1,7 +1,10 @@
+import utility.DAO;
+import utility.DBConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ProductDAO implements DOA<Product> {
+public class ProductDAO implements DAO<Product> {
   // Connection to the database
   private Connection connection;
 
@@ -41,7 +44,7 @@ public class ProductDAO implements DOA<Product> {
   }
 
   public final Product getById(int id) {
-    // User object to store the result
+    // users.User object to store the result
     Product product = new Product();
     // SQL query to get a user by id
     final String query = "SELECT * FROM products WHERE product_id = ?";

@@ -1,9 +1,13 @@
+package transaction;
+
+import utility.*;
+
 import java.sql.*;
 import java.util.ArrayList;
-public class TransactionsDAO implements DAO<Transaction>{
+public class TransactionDAO implements DAO<Transaction> {
   private Connection connection;
 
-  public TransactionsDAO() {
+  public TransactionDAO() {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
