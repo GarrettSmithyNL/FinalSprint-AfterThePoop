@@ -1,4 +1,3 @@
-// src/Admin.java
 import java.util.ArrayList;
 
 public class Admin extends User {

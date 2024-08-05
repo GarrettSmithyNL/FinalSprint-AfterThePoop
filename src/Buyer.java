@@ -1,4 +1,3 @@
-// src/Buyer.java
 import java.util.ArrayList;
 
 public class Buyer extends User {
