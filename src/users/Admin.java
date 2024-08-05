@@ -1,3 +1,5 @@
+package users;
+
 import java.util.ArrayList;
 
 public class Admin extends User {

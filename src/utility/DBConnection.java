@@ -1,3 +1,5 @@
+package utility;
+
 import java.sql.*;
 public class DBConnection {
   private static final String URL = "jdbc:postgresql://localhost:5432/AfterThePoop";
