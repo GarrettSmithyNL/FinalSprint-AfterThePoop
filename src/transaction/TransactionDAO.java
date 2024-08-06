@@ -11,7 +11,7 @@ public class TransactionDAO implements DAO<Transaction> {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -32,7 +32,7 @@ public class TransactionDAO implements DAO<Transaction> {
         transactions.add(transaction);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return transactions;
   }
@@ -53,7 +53,7 @@ public class TransactionDAO implements DAO<Transaction> {
         transaction.setPrice(resultSet.getDouble("price"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return transaction;
   }
@@ -69,7 +69,7 @@ public class TransactionDAO implements DAO<Transaction> {
       statement.setDouble(5, transaction.getPrice());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -85,7 +85,7 @@ public class TransactionDAO implements DAO<Transaction> {
       statement.setInt(6, transaction.getTransactionId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -96,7 +96,7 @@ public class TransactionDAO implements DAO<Transaction> {
       statement.setInt(1, transaction.getTransactionId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 }

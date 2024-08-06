@@ -29,7 +29,7 @@ public class UserServices {
     public void resetPassword(String email, String newPassword) {
         User user = userDAO.getByEmail(email);
         if (user != null) {
-            user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+            user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt(10)));
             userDAO.update(user);
         }
     }
