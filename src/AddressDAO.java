@@ -1,3 +1,6 @@
+import utility.DAO;
+import utility.DBConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -8,7 +11,7 @@ public class AddressDAO implements DAO<Address> {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -28,7 +31,7 @@ public class AddressDAO implements DAO<Address> {
         addresses.add(address);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return addresses;
   }
@@ -48,7 +51,7 @@ public class AddressDAO implements DAO<Address> {
         address.setPostalCode(resultSet.getString("postal_code"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return address;
   }
@@ -63,7 +66,7 @@ public class AddressDAO implements DAO<Address> {
       statement.setString(4, address.getPostalCode());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -78,7 +81,7 @@ public class AddressDAO implements DAO<Address> {
       statement.setInt(5, address.getAddressId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -89,7 +92,7 @@ public class AddressDAO implements DAO<Address> {
       statement.setInt(1, address.getAddressId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 }

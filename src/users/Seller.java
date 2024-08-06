@@ -1,4 +1,7 @@
+package users;
+
 import java.util.ArrayList;
+import product.*;
 
 public class Seller extends User {
     private ProductDAO productDAO;

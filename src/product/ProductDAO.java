@@ -1,7 +1,12 @@
+package product;
+
+import product.Product;
+import utility.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ProductDAO implements DOA<Product> {
+public class ProductDAO implements DAO<Product> {
   // Connection to the database
   private Connection connection;
 
@@ -10,7 +15,7 @@ public class ProductDAO implements DOA<Product> {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
   public final ArrayList<Product> getAll() {
@@ -35,13 +40,13 @@ public class ProductDAO implements DOA<Product> {
       }
     } catch (SQLException e) {
       // Print the error message
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return products;
   }
 
   public final Product getById(int id) {
-    // User object to store the result
+    // users.User object to store the result
     Product product = new Product();
     // SQL query to get a user by id
     final String query = "SELECT * FROM products WHERE product_id = ?";
@@ -60,7 +65,7 @@ public class ProductDAO implements DOA<Product> {
         product.setNPercent(resultSet.getInt("n_percent"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return product;
   }
@@ -78,7 +83,7 @@ public class ProductDAO implements DOA<Product> {
       statement.setInt(5, product.getNPercent());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -96,7 +101,7 @@ public class ProductDAO implements DOA<Product> {
       statement.setInt(6, product.getProductId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -109,7 +114,7 @@ public class ProductDAO implements DOA<Product> {
       statement.setInt(1, product.getProductId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 

@@ -1,4 +1,7 @@
-import static java.lang.StringTemplate.STR;
+package users;
+
+import utility.*;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ public class UserDAO implements DAO<User> {
       // Get the connection to the database
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
   public final ArrayList<User> getAll() {
@@ -40,13 +43,13 @@ public class UserDAO implements DAO<User> {
       }
     } catch (SQLException e) {
       // Print the error message
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return users;
   }
 
   public final User getById(int id) {
-    // User object to store the result
+    // users.User object to store the result
     User user = new User();
     // SQL query to get a user by id
     final String query = "SELECT * FROM users WHERE user_id = ?";
@@ -67,7 +70,7 @@ public class UserDAO implements DAO<User> {
         user.setAdmin(resultSet.getBoolean("is_admin"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return user;
   }
@@ -87,7 +90,7 @@ public class UserDAO implements DAO<User> {
       statement.setBoolean(7, user.isAdmin());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -107,7 +110,7 @@ public class UserDAO implements DAO<User> {
       statement.setInt(8, user.getUserId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -120,7 +123,7 @@ public class UserDAO implements DAO<User> {
       statement.setInt(1, user.getUserId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 

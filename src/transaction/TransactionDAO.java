@@ -1,13 +1,17 @@
+package transaction;
+
+import utility.*;
+
 import java.sql.*;
 import java.util.ArrayList;
-public class TransactionsDAO implements DAO<Transaction>{
+public class TransactionDAO implements DAO<Transaction> {
   private Connection connection;
 
-  public TransactionsDAO() {
+  public TransactionDAO() {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -28,7 +32,7 @@ public class TransactionsDAO implements DAO<Transaction>{
         transactions.add(transaction);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return transactions;
   }
@@ -49,7 +53,7 @@ public class TransactionsDAO implements DAO<Transaction>{
         transaction.setPrice(resultSet.getDouble("price"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return transaction;
   }
@@ -65,7 +69,7 @@ public class TransactionsDAO implements DAO<Transaction>{
       statement.setDouble(5, transaction.getPrice());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -81,7 +85,7 @@ public class TransactionsDAO implements DAO<Transaction>{
       statement.setInt(6, transaction.getTransactionId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -92,7 +96,7 @@ public class TransactionsDAO implements DAO<Transaction>{
       statement.setInt(1, transaction.getTransactionId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 }

@@ -1,3 +1,5 @@
+package users;
+
 public class User {
     private int userId;
     private int addressId;
