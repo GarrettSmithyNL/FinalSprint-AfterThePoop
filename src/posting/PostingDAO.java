@@ -1,13 +1,17 @@
+package posting;
+
+import utility.*;
 import java.sql.*;
 import java.util.ArrayList;
-public class PostingsDAO implements DAO<Posting>{
+
+public class PostingDAO implements DAO<Posting> {
   private Connection connection;
 
-  public PostingsDAO() {
+  public PostingDAO() {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -27,7 +31,7 @@ public class PostingsDAO implements DAO<Posting>{
         postings.add(posting);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return postings;
   }
@@ -47,7 +51,7 @@ public class PostingsDAO implements DAO<Posting>{
         posting.setPrice(resultSet.getDouble("price"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return posting;
   }
@@ -62,7 +66,7 @@ public class PostingsDAO implements DAO<Posting>{
       statement.setDouble(4, posting.getPrice());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -77,7 +81,7 @@ public class PostingsDAO implements DAO<Posting>{
       statement.setInt(5, posting.getPostingId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -88,7 +92,7 @@ public class PostingsDAO implements DAO<Posting>{
       statement.setInt(1, posting.getPostingId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -109,7 +113,7 @@ public class PostingsDAO implements DAO<Posting>{
         postings.add(posting);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return postings;
   }

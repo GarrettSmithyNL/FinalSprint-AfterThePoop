@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+package users;
 
+import java.util.ArrayList;
+import product.*;
 public class Admin extends User {
     private UserDAO userDAO;
     private ProductDAO productDAO;

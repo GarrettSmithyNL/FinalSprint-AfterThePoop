@@ -1,0 +1,43 @@
+package posting;
+
+import posting.Posting;
+import posting.PostingDAO;
+
+import java.util.ArrayList;
+public class PostingServices {
+    private PostingDAO postingDAO;
+
+    public PostingServices() {
+        this.postingDAO = new PostingDAO();
+    }
+
+    // Function to see all available postings
+    // BUYER
+    public ArrayList<Posting> seeAvailablePostings() {
+        return postingDAO.getAll();
+    }
+
+    // Function to see a specific posting
+    // BUYER
+    public Posting seeSpecificPosting(int postingId) {
+        return postingDAO.getById(postingId);
+    }
+
+    // Function to Create posting.Posting
+    // SELLER
+    public void createPosting(Posting posting) {
+        postingDAO.insert(posting);
+    }
+
+    // Function to Update posting.Posting
+    // SELLER
+    public void updatePosting(Posting posting) {
+        postingDAO.update(posting);
+    }
+
+    // Function to Delete posting.Posting
+    // SELLER
+    public void deletePosting(Posting posting) {
+        postingDAO.delete(posting);
+    }
+}

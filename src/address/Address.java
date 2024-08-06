@@ -1,3 +1,5 @@
+package address;
+
 public class Address {
     private int addressId;
     private String street;
