@@ -11,7 +11,7 @@ public class PostingDAO implements DAO<Posting> {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -31,7 +31,7 @@ public class PostingDAO implements DAO<Posting> {
         postings.add(posting);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return postings;
   }
@@ -51,7 +51,7 @@ public class PostingDAO implements DAO<Posting> {
         posting.setPrice(resultSet.getDouble("price"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return posting;
   }
@@ -66,7 +66,7 @@ public class PostingDAO implements DAO<Posting> {
       statement.setDouble(4, posting.getPrice());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -81,7 +81,7 @@ public class PostingDAO implements DAO<Posting> {
       statement.setInt(5, posting.getPostingId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -92,7 +92,7 @@ public class PostingDAO implements DAO<Posting> {
       statement.setInt(1, posting.getPostingId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -113,7 +113,7 @@ public class PostingDAO implements DAO<Posting> {
         postings.add(posting);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return postings;
   }

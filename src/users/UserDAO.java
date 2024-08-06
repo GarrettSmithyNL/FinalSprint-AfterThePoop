@@ -1,9 +1,7 @@
 package users;
 
-import users.User;
 import utility.*;
 
-import static java.lang.StringTemplate.STR;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ public class UserDAO implements DAO<User> {
       // Get the connection to the database
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
   public final ArrayList<User> getAll() {
@@ -45,7 +43,7 @@ public class UserDAO implements DAO<User> {
       }
     } catch (SQLException e) {
       // Print the error message
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return users;
   }
@@ -72,7 +70,7 @@ public class UserDAO implements DAO<User> {
         user.setAdmin(resultSet.getBoolean("is_admin"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return user;
   }
@@ -92,7 +90,7 @@ public class UserDAO implements DAO<User> {
       statement.setBoolean(7, user.isAdmin());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -112,7 +110,7 @@ public class UserDAO implements DAO<User> {
       statement.setInt(8, user.getUserId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -125,7 +123,7 @@ public class UserDAO implements DAO<User> {
       statement.setInt(1, user.getUserId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 

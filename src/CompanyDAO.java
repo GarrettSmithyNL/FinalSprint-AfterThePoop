@@ -10,7 +10,7 @@ public class CompanyDAO implements DAO<Company> {
     try {
       connection = DBConnection.getConnection();
     } catch (Exception e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -29,7 +29,7 @@ public class CompanyDAO implements DAO<Company> {
         companies.add(company);
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return companies;
   }
@@ -48,7 +48,7 @@ public class CompanyDAO implements DAO<Company> {
         company.setCompanyPhone(resultSet.getString("company_phone"));
       }
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
     return company;
   }
@@ -62,7 +62,7 @@ public class CompanyDAO implements DAO<Company> {
       statement.setString(3, company.getCompanyPhone());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -76,7 +76,7 @@ public class CompanyDAO implements DAO<Company> {
       statement.setInt(4, company.getCompanyId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 
@@ -87,7 +87,7 @@ public class CompanyDAO implements DAO<Company> {
       statement.setInt(1, company.getCompanyId());
       statement.executeUpdate();
     } catch (SQLException e) {
-      System.out.println(STR."Error: \{e.getMessage()}");
+      System.out.println("Error: " + e.getMessage());
     }
   }
 }
