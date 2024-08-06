@@ -1,3 +1,5 @@
+package company;
+
 public class Company {
     private int companyId;
     private int addressId;
