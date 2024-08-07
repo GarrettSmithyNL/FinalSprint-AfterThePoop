@@ -1,11 +1,34 @@
 package product;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public interface ProductService {
-    void addProduct(Product product);
-    void updateProduct(Product product);
-    void deleteProduct(int product_id);
-    Product getProductById(int product_id);
-    List<Product> getAllProducts();
+public class ProductService {
+    private final ProductDAO productDAO;
+
+    public ProductService() {
+        this.productDAO = new ProductDAO();
+    }
+
+    public int addProduct(Product product) {
+        return productDAO.insert(product);
+    }
+
+    public void updateProduct(Product product) {
+        productDAO.update(product);
+    }
+
+    public void deleteProduct(Product product) {
+        productDAO.delete(product);
+    }
+
+    public Product getProductById(int product_id) {
+        return productDAO.getById(product_id);
+    }
+
+    public List<Product> getAllProducts() {
+        return productDAO.getAll();
+    }
+
+
 }

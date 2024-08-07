@@ -58,8 +58,8 @@ public class TransactionDAO implements DAO<Transaction> {
     return transaction;
   }
 
-  public final void insert(Transaction transaction) {
-    final String query = "INSERT INTO transactions (buyer_id, seller_id, product_id, quantity, price) VALUES (?, ?, ?, ?, ?)";
+  public final int insert(Transaction transaction) {
+    final String query = "INSERT INTO transactions (buyer_id, seller_id, product_id, quantity, price) VALUES (?, ?, ?, ?, ?) RETURNING transaction_id";
     try {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setInt(1, transaction.getBuyerId());
@@ -67,10 +67,14 @@ public class TransactionDAO implements DAO<Transaction> {
       statement.setInt(3, transaction.getProductId());
       statement.setInt(4, transaction.getQuantity());
       statement.setDouble(5, transaction.getPrice());
-      statement.executeUpdate();
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next()) {
+        return resultSet.getInt(1);
+      }
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage());
     }
+    return -1;
   }
 
   public final void update(Transaction transaction) {

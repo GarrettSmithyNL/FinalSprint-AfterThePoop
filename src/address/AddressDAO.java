@@ -1,7 +1,6 @@
 package address;
 
-import utility.DAO;
-import utility.DBConnection;
+import utility.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -58,18 +57,23 @@ public class AddressDAO implements DAO<Address> {
     return address;
   }
 
-  public final void insert(Address address) {
-    final String query = "INSERT INTO address (street, city, province, postal_code) VALUES (?, ?, ?, ?)";
+  public final int insert(Address address) {
+    final String query = "INSERT INTO address (street, city, province, postal_code) VALUES (?, ?, ?, ?) RETURNING address_id";
     try {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, address.getStreet());
       statement.setString(2, address.getCity());
       statement.setString(3, address.getProvince());
       statement.setString(4, address.getPostalCode());
-      statement.executeUpdate();
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next()) {
+        return resultSet.getInt("address_id");
+      }
+
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage());
     }
+    return -1;
   }
 
   public final void update(Address address) {

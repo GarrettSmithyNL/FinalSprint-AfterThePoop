@@ -24,7 +24,7 @@ public class TransactionServices {
   }
 
   // Function to insert a transaction
-  public final void insert(Transaction transaction) {
-    transactionDAO.insert(transaction);
+  public final int insert(Transaction transaction) {
+    return transactionDAO.insert(transaction);
   }
 }
