@@ -10,6 +10,14 @@ public class Transaction {
 
   public Transaction() {}
 
+  public Transaction(int buyerId, int sellerId, int productId, int quantity, double price) {
+    this.buyerId = buyerId;
+    this.sellerId = sellerId;
+    this.productId = productId;
+    this.quantity = quantity;
+    this.price = price;
+}
+
   public int getTransactionId() {
     return transactionId;
   }

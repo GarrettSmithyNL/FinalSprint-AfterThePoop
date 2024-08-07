@@ -1,8 +1,5 @@
 package posting;
 
-import posting.Posting;
-import posting.PostingDAO;
-
 import java.util.ArrayList;
 public class PostingServices {
     private PostingDAO postingDAO;
@@ -41,9 +38,20 @@ public class PostingServices {
         postingDAO.delete(posting);
     }
 
+
     // Function to delete all postings by a specific seller
     // ADMIN
     public void deleteAllPostingsBySeller(int sellerId) {
         postingDAO.deleteAllBySeller(sellerId);
+  
+    // New method to update posting quantity for the Buyer
+    public void updatePostingQuantity(int postingId, int newQuantity) {
+        Posting posting = postingDAO.getById(postingId);
+        if (posting != null) {
+            posting.setQuantity(newQuantity);
+            postingDAO.update(posting);
+        }
+
     }
 }
+
