@@ -7,16 +7,20 @@ public class MainMenu {
     boolean running = true;
     System.out.println("Welcome to After The Poop!");
     System.out.println("Your Personal Fertilizer reseller!");
+    Scanner scanner = new Scanner(System.in);
     while (running) {
       System.out.println("Please follow the menu options below:");
       System.out.println("1. Login");
       System.out.println("2. Register");
       System.out.println("3. Exit");
-      Scanner scanner = new Scanner(System.in);
       switch (scanner.nextInt()) {
         case 1:
           LoginMenu loginMenu = new LoginMenu();
-          loginMenu.loginMenu();
+          int loggedInUserId = loginMenu.loginMenu();
+          if (loggedInUserId != -1) {
+            SubMenu subMenu = new SubMenu();
+            subMenu.subMenu(loggedInUserId);
+          }
           break;
         case 2:
           RegistrationMenu registrationMenu = new RegistrationMenu();
@@ -31,6 +35,7 @@ public class MainMenu {
           break;
       }
     }
+    scanner.close();
   }
 
   public static void main(String[] args) {

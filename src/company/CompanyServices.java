@@ -17,8 +17,8 @@ public class CompanyServices {
         return companyDAO.getById(id);
     }
 
-    public void addCompany(Company company) {
-        companyDAO.insert(company);
+    public int addCompany(Company company) {
+        return companyDAO.insert(company);
     }
 
     public void updateCompany(Company company) {
