@@ -17,8 +17,8 @@ public class AddressServices {
         return addressDAO.getAll();
     }
 
-    public void addAddress(Address address) {
-        addressDAO.insert(address);
+    public int addAddress(Address address) {
+        return addressDAO.insert(address);
     }
 
     public void updateAddress(Address address) {

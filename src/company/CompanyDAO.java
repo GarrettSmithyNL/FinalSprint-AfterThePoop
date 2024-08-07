@@ -55,17 +55,21 @@ public class CompanyDAO implements DAO<Company> {
     return company;
   }
 
-  public final void insert(Company company) {
-    final String query = "INSERT INTO company (address_id, company_name, company_phone) VALUES (?, ?, ?)";
+  public final int insert(Company company) {
+    final String query = "INSERT INTO company (address_id, company_name, company_phone) VALUES (?, ?, ?) RETURNING company_id";
     try {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setInt(1, company.getAddressId());
       statement.setString(2, company.getCompanyName());
       statement.setString(3, company.getCompanyPhone());
-      statement.executeUpdate();
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next()) {
+        return resultSet.getInt("company_id");
+      }
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage());
     }
+    return -1;
   }
 
   public final void update(Company company) {

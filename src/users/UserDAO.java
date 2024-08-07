@@ -75,9 +75,9 @@ public class UserDAO implements DAO<User> {
     return user;
   }
 
-  public final void insert(User user) {
+  public final int insert(User user) {
     // SQL query to insert a user into the database
-    final String query = "INSERT INTO users (address_id, company_id, user_name, email, password, user_phone, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    final String query = "INSERT INTO users (address_id, company_id, user_name, email, password, user_phone, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING user_id";
     // Try to execute the query
     try {
       PreparedStatement statement = connection.prepareStatement(query);
@@ -88,10 +88,14 @@ public class UserDAO implements DAO<User> {
       statement.setString(5, user.getPassword());
       statement.setString(6, user.getUserPhone());
       statement.setBoolean(7, user.isAdmin());
-      statement.executeUpdate();
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next()) {
+        return resultSet.getInt("user_id");
+      }
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage());
     }
+    return -1;
   }
 
   public final void update(User user) {
