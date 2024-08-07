@@ -4,17 +4,15 @@ public class Product {
     private int product_id;
     private String product_name;
     private String product_description;
-    private double price;
     private int k_percent;
     private int p_percent;
     private int n_percent;
 
     // Constructor with all fields
-    public Product(int product_id, String product_name, String product_description, double price, int k_percent, int p_percent, int n_percent) {
+    public Product(int product_id, String product_name, String product_description, int k_percent, int p_percent, int n_percent) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.product_description = product_description;
-        this.price = price;
         this.k_percent = k_percent;
         this.p_percent = p_percent;
         this.n_percent = n_percent;
@@ -33,9 +31,6 @@ public class Product {
 
     public String getProduct_description() { return product_description; }
     public void setProduct_description(String product_description) { this.product_description = product_description; }
-
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
 
     public int getK_percent() { return k_percent; }
     public void setK_percent(int k_percent) { this.k_percent = k_percent; }

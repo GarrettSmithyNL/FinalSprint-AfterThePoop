@@ -56,18 +56,22 @@ public class PostingDAO implements DAO<Posting> {
     return posting;
   }
 
-  public final void insert(Posting posting) {
-    final String query = "INSERT INTO postings (seller_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+  public final int insert(Posting posting) {
+    final String query = "INSERT INTO postings (seller_id, product_id, quantity, price) VALUES (?, ?, ?, ?) RETURNING posting_id";
     try {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setInt(1, posting.getSellerId());
       statement.setInt(2, posting.getProductId());
       statement.setInt(3, posting.getQuantity());
       statement.setDouble(4, posting.getPrice());
-      statement.executeUpdate();
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next()) {
+        return resultSet.getInt("posting_id");
+      }
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage());
     }
+    return -1;
   }
 
   public final void update(Posting posting) {
@@ -116,5 +120,16 @@ public class PostingDAO implements DAO<Posting> {
       System.out.println("Error: " + e.getMessage());
     }
     return postings;
+  }
+
+  public final void deleteAllBySeller(int sellerId) {
+    final String query = "DELETE FROM postings WHERE seller_id = ?";
+    try {
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setInt(1, sellerId);
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("Error: " + e.getMessage());
+    }
   }
 }

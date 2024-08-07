@@ -14,70 +14,70 @@ public class SellerSubMenu {
         this.scanner = new Scanner(System.in);
     }
 
-    public void displayMenu() {
-        int choice;
-        do {
-            System.out.println("\nSeller Submenu:");
-            System.out.println("1. List All Products");
-            System.out.println("2. Add New Product");
-            System.out.println("3. Update Product");
-            System.out.println("4. Delete Product");
-            System.out.println("5. Exit to Main Menu");
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+//    public void displayMenu() {
+//        int choice;
+//        do {
+//            System.out.println("\nSeller Submenu:");
+//            System.out.println("1. List All Products");
+//            System.out.println("2. Add New Product");
+//            System.out.println("3. Update Product");
+//            System.out.println("4. Delete Product");
+//            System.out.println("5. Exit to Main Menu");
+//            System.out.print("Enter your choice: ");
+//            choice = scanner.nextInt();
+//            scanner.nextLine(); // Consume newline
+//
+//            switch (choice) {
+//                case 1:
+//                    listAllProducts();
+//                    break;
+//                case 2:
+//                    addNewProduct();
+//                    break;
+//                case 3:
+//                    updateProduct();
+//                    break;
+//                case 4:
+//                    deleteProduct();
+//                    break;
+//                case 5:
+//                    System.out.println("Exiting to Main Menu...");
+//                    break;
+//                default:
+//                    System.out.println("Invalid choice, please try again.");
+//            }
+//        } while (choice != 5);
+//    }
 
-            switch (choice) {
-                case 1:
-                    listAllProducts();
-                    break;
-                case 2:
-                    addNewProduct();
-                    break;
-                case 3:
-                    updateProduct();
-                    break;
-                case 4:
-                    deleteProduct();
-                    break;
-                case 5:
-                    System.out.println("Exiting to Main Menu...");
-                    break;
-                default:
-                    System.out.println("Invalid choice, please try again.");
-            }
-        } while (choice != 5);
-    }
+//    private void listAllProducts() {
+//        List<Product> products = productService.getAllProducts();
+//        System.out.println("Products:");
+//        for (Product product : products) {
+//            System.out.println("ID: " + product.getProduct_id() + ", Name: " + product.getProduct_name() +
+//                    ", Description: " + product.getProduct_description() + ", Price: " + product.getPrice() +
+//                    ", K%: " + product.getK_percent() + ", P%: " + product.getP_percent() + ", N%: " + product.getN_percent());
+//        }
+//    }
 
-    private void listAllProducts() {
-        List<Product> products = productService.getAllProducts();
-        System.out.println("Products:");
-        for (Product product : products) {
-            System.out.println("ID: " + product.getProduct_id() + ", Name: " + product.getProduct_name() +
-                    ", Description: " + product.getProduct_description() + ", Price: " + product.getPrice() +
-                    ", K%: " + product.getK_percent() + ", P%: " + product.getP_percent() + ", N%: " + product.getN_percent());
-        }
-    }
-
-    private void addNewProduct() {
-        System.out.print("Enter product name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter product description: ");
-        String description = scanner.nextLine();
-        System.out.print("Enter price: ");
-        double price = scanner.nextDouble();
-        System.out.print("Enter K%: ");
-        int kPercent = scanner.nextInt();
-        System.out.print("Enter P%: ");
-        int pPercent = scanner.nextInt();
-        System.out.print("Enter N%: ");
-        int nPercent = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
-        Product product = new Product(0, name, description, price, kPercent, pPercent, nPercent);
-        productService.addProduct(product);
-        System.out.println("Product added successfully.");
-    }
+//    private void addNewProduct() {
+//        System.out.print("Enter product name: ");
+//        String name = scanner.nextLine();
+//        System.out.print("Enter product description: ");
+//        String description = scanner.nextLine();
+//        System.out.print("Enter price: ");
+//        double price = scanner.nextDouble();
+//        System.out.print("Enter K%: ");
+//        int kPercent = scanner.nextInt();
+//        System.out.print("Enter P%: ");
+//        int pPercent = scanner.nextInt();
+//        System.out.print("Enter N%: ");
+//        int nPercent = scanner.nextInt();
+//        scanner.nextLine(); // Consume newline
+//
+//        Product product = new Product(0, name, description, price, kPercent, pPercent, nPercent);
+//        productService.addProduct(product);
+//        System.out.println("Product added successfully.");
+//    }
 
     private void updateProduct() {
         System.out.print("Enter product ID to update: ");
@@ -102,11 +102,11 @@ public class SellerSubMenu {
             product.setProduct_description(description);
         }
 
-        System.out.print("Enter new price (or -1 to keep current): ");
-        double price = scanner.nextDouble();
-        if (price != -1) {
-            product.setPrice(price);
-        }
+//        System.out.print("Enter new price (or -1 to keep current): ");
+//        double price = scanner.nextDouble();
+//        if (price != -1) {
+//            product.setPrice(price);
+//        }
 
         System.out.print("Enter new K% (or -1 to keep current): ");
         int kPercent = scanner.nextInt();
@@ -131,12 +131,12 @@ public class SellerSubMenu {
         System.out.println("Product updated successfully.");
     }
 
-    private void deleteProduct() {
-        System.out.print("Enter product ID to delete: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
-        productService.deleteProduct(id);
-        System.out.println("Product deleted successfully.");
-    }
+//    private void deleteProduct() {
+//        System.out.print("Enter product ID to delete: ");
+//        int id = scanner.nextInt();
+//        scanner.nextLine(); // Consume newline
+//
+//        productService.deleteProduct(id);
+//        System.out.println("Product deleted successfully.");
+//    }
 }

@@ -22,8 +22,8 @@ public class PostingServices {
 
     // Function to Create posting.Posting
     // SELLER
-    public void createPosting(Posting posting) {
-        postingDAO.insert(posting);
+    public int createPosting(Posting posting) {
+        return postingDAO.insert(posting);
     }
 
     // Function to Update posting.Posting
@@ -38,6 +38,12 @@ public class PostingServices {
         postingDAO.delete(posting);
     }
 
+
+    // Function to delete all postings by a specific seller
+    // ADMIN
+    public void deleteAllPostingsBySeller(int sellerId) {
+        postingDAO.deleteAllBySeller(sellerId);
+  
     // New method to update posting quantity for the Buyer
     public void updatePostingQuantity(int postingId, int newQuantity) {
         Posting posting = postingDAO.getById(postingId);
@@ -45,6 +51,7 @@ public class PostingServices {
             posting.setQuantity(newQuantity);
             postingDAO.update(posting);
         }
+
     }
 }
 
