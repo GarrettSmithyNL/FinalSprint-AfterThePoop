@@ -25,3 +25,6 @@ replay_pid*
 
 # Out file
 out
+
+# .idea
+.idea
