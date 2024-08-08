@@ -60,26 +60,26 @@ public class BuyerSubMenu {
         System.out.print("Enter posting ID to purchase: ");
         int postingId = scanner.nextInt();
         scanner.nextLine(); // Consume newline
-    
+
         Posting posting = postingServices.seeSpecificPosting(postingId);
         if (posting == null) {
             System.out.println("Posting not found.");
             return;
         }
-    
+
         System.out.print("Enter quantity to purchase: ");
         int quantity = scanner.nextInt();
         scanner.nextLine(); // Consume newline
-    
+
         if (quantity > posting.getQuantity()) {
             System.out.println("Not enough quantity available.");
             return;
         }
-    
+
         // Create a new transaction
         Transaction transaction = new Transaction(buyer.getUserId(), posting.getSellerId(), posting.getProductId(), quantity, posting.getPrice());
         transactionService.insert(transaction);
-    
+
         // Update the posting quantity
         postingServices.updatePostingQuantity(postingId, posting.getQuantity() - quantity);
         System.out.println("Purchase successful.");
