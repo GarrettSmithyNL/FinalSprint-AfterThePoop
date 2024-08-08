@@ -93,7 +93,7 @@ public class ProductDAO implements DAO<Product> {
 
   public final void update(Product product) {
     // SQL query to update a user in the database
-    final String query = "UPDATE products SET product_name = ?, product_description = ?, k_percent = ?, p_percent = ?, n_percent = ? WHERE user_id = ?";
+    final String query = "UPDATE products SET product_name = ?, product_description = ?, k_percent = ?, p_percent = ?, n_percent = ? WHERE product_id = ?";
     // Try to execute the query
     try {
       PreparedStatement statement = connection.prepareStatement(query);

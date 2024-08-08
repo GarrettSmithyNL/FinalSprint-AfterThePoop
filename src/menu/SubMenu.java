@@ -26,10 +26,12 @@ public class SubMenu {
 
             switch (scanner.nextInt()) {
                 case 1:
-                    System.out.println("Buyer Menu");
+                    BuyerSubMenu buyerSubMenu = new BuyerSubMenu(user);
+                    buyerSubMenu.displayMenu();
                     break;
                 case 2:
-                    System.out.println("Seller Menu");
+                    SellerSubMenu sellerSubMenu = new SellerSubMenu(user);
+                    sellerSubMenu.displayMenu();
                     break;
                 case 3:
                     if (user.isAdmin()) {

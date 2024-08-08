@@ -1,22 +1,20 @@
 package menu;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import posting.Posting;
-import posting.PostingServices;
-import transaction.Transaction;
-import transaction.TransactionServices;
+
+import company.*;
+import posting.*;
+import product.*;
+import transaction.*;
 import users.*;
 
 public class BuyerSubMenu {
-    private final PostingServices postingServices;
-    private final TransactionServices transactionService;
     private final User buyer;
     private final Scanner scanner;
 
-    public BuyerSubMenu(PostingServices postingServices, TransactionServices transactionService, User buyer) {
-        this.postingServices = postingServices;
-        this.transactionService = transactionService;
+    public BuyerSubMenu(User buyer) {
         this.buyer = buyer;
         this.scanner = new Scanner(System.in);
     }
@@ -34,7 +32,7 @@ public class BuyerSubMenu {
 
             switch (choice) {
                 case 1:
-                    seeAllPostings();
+                    viewAllPostings();
                     break;
                 case 2:
                     purchaseProduct();
@@ -48,15 +46,24 @@ public class BuyerSubMenu {
         } while (choice != 3);
     }
 
-    private void seeAllPostings() {
-        List<Posting> postings = postingServices.seeAvailablePostings();
-        System.out.println("Postings:");
+    private void viewAllPostings() {
+        PostingServices postingServices = new PostingServices();
+        ProductService productService = new ProductService();
+        UserServices userServices = new UserServices();
+        CompanyServices companyServices = new CompanyServices();
+        ArrayList<Posting> postings = postingServices.seeAvailablePostings();
+        System.out.printf("--------------------------------------------------------------------------------%n");
+        System.out.printf(" ID |             Name             |  Quantity  |  Price  |        Company      %n");
+        System.out.printf("--------------------------------------------------------------------------------%n");
         for (Posting posting : postings) {
-            System.out.println("ID: " + posting.getPostingId() + ", Product ID: " + posting.getProductId() +
-                    ", Quantity: " + posting.getQuantity() + ", Price: " + posting.getPrice());
+            Product product = productService.getProductById(posting.getProductId());
+            Company company = companyServices.getCompanyById(userServices.getUserById(posting.getSellerId()).getCompanyId());
+            System.out.printf("%4d|%30S|%8d LBS|$%8.2f|%21S%n", posting.getPostingId(), product.getProduct_name(), posting.getQuantity(), posting.getPrice(), company.getCompanyName());
         }
     }
     private void purchaseProduct() {
+        PostingServices postingServices = new PostingServices();
+        TransactionServices transactionService = new TransactionServices();
         System.out.print("Enter posting ID to purchase: ");
         int postingId = scanner.nextInt();
         scanner.nextLine(); // Consume newline
