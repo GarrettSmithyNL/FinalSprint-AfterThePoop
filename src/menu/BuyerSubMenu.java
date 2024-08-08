@@ -6,15 +6,15 @@ import posting.Posting;
 import posting.PostingServices;
 import transaction.Transaction;
 import transaction.TransactionServices;
-import users.Buyer;
+import users.*;
 
 public class BuyerSubMenu {
     private final PostingServices postingServices;
     private final TransactionServices transactionService;
-    private final Buyer buyer;
+    private final User buyer;
     private final Scanner scanner;
 
-    public BuyerSubMenu(PostingServices postingServices, TransactionServices transactionService, Buyer buyer) {
+    public BuyerSubMenu(PostingServices postingServices, TransactionServices transactionService, User buyer) {
         this.postingServices = postingServices;
         this.transactionService = transactionService;
         this.buyer = buyer;
