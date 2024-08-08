@@ -43,7 +43,7 @@ public class PostingServices {
     // ADMIN
     public void deleteAllPostingsBySeller(int sellerId) {
         postingDAO.deleteAllBySeller(sellerId);
-  
+    }
     // New method to update posting quantity for the Buyer
     public void updatePostingQuantity(int postingId, int newQuantity) {
         Posting posting = postingDAO.getById(postingId);
