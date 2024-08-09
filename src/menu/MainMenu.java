@@ -2,7 +2,15 @@ package menu;
 
 import java.util.Scanner;
 
+/**
+ * MainMenu class provides the main menu interface for the application.
+ * It allows users to login, register, or exit the application.
+ */
 public class MainMenu {
+
+  /**
+   * Displays the main menu and handles user input for various operations.
+   */
   public void mainMenu() {
     boolean running = true;
     System.out.println("Welcome to After The Poop!");
@@ -38,6 +46,11 @@ public class MainMenu {
     scanner.close();
   }
 
+  /**
+   * The main method to start the application.
+   *
+   * @param args command line arguments
+   */
   public static void main(String[] args) {
     MainMenu mainMenu = new MainMenu();
     mainMenu.mainMenu();

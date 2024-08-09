@@ -7,19 +7,35 @@ import users.User;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * SellerSubMenu class provides a menu interface for seller users to manage their products and postings.
+ */
 public class SellerSubMenu {
     private final Scanner scanner;
     private final User user;
+    private final PostingServices postingServices;
+    private final ProductService productServices;
 
+    /**
+     * Constructor for SellerSubMenu.
+     * Initializes the services and scanner.
+     *
+     * @param user the seller user
+     */
     public SellerSubMenu(User user) {
+        this.postingServices = new PostingServices();
+        this.productServices = new ProductService();
         this.scanner = new Scanner(System.in);
         this.user = user;
     }
 
+    /**
+     * Displays the seller submenu and handles user input for various seller operations.
+     */
     public void displayMenu() {
         int choice;
         do {
-            System.out.println("1. List All Products");
+            System.out.println("1. List All your Postings");
             System.out.println("2. Add New Product");
             System.out.println("3. Update Product");
             System.out.println("4. Delete Product");
@@ -62,9 +78,12 @@ public class SellerSubMenu {
         } while (choice != 8);
     }
 
+    /**
+     * Lists all products posted by the seller.
+     *
+     * @param user the seller user
+     */
     private void listAllProducts(User user) {
-        PostingServices postingServices = new PostingServices();
-        ProductService productService = new ProductService();
         ArrayList<Posting> postings = postingServices.seeAvailablePostings();
         ArrayList<Posting> userPostings = new ArrayList<>();
         for (Posting posting : postings) {
@@ -76,13 +95,15 @@ public class SellerSubMenu {
         System.out.printf(" ID |             Name             |  K Per  |  P Per  |  N Per  |  Quantity  |  Price  |  Seller ID  %n");
         System.out.printf("------------------------------------------------------------------------------------------------------%n");
         for (Posting posting : userPostings) {
-            Product product = productService.getProductById(posting.getProductId());
+            Product product = productServices.getProductById(posting.getProductId());
             System.out.printf("%4d|%30S|%9d|%9d|%9d|%8d LBS|$%8.2f|%13d%n", posting.getPostingId(), product.getProduct_name(), product.getK_percent(), product.getP_percent(), product.getN_percent(), posting.getQuantity(), posting.getPrice(), posting.getSellerId());
         }
     }
 
+    /**
+     * Adds a new product to the system.
+     */
     private void addNewProduct() {
-        ProductService productServices = new ProductService();
         Product product = new Product();
         System.out.print("Enter product name: ");
         product.setProduct_name(scanner.nextLine());
@@ -100,13 +121,15 @@ public class SellerSubMenu {
         System.out.println("Product ID: " + productID);
     }
 
+    /**
+     * Updates an existing product in the system.
+     */
     private void updateProduct() {
-        ProductService productService = new ProductService();
         System.out.print("Enter product ID to update: ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
-        Product product = productService.getProductById(id);
+        Product product = productServices.getProductById(id);
         if (product == null) {
             System.out.println("Product not found.");
             return;
@@ -143,21 +166,27 @@ public class SellerSubMenu {
         }
         scanner.nextLine(); // Consume newline
 
-        productService.updateProduct(product);
+        productServices.updateProduct(product);
         System.out.println("Product updated successfully.");
     }
 
+    /**
+     * Deletes a product from the system.
+     */
     private void deleteProduct() {
-        ProductService productService = new ProductService();
         System.out.print("Enter product ID to delete: ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Consume newline
-        productService.deleteProduct(productService.getProductById(id));
+        productServices.deleteProduct(productServices.getProductById(id));
         System.out.println("Product deleted successfully.");
     }
 
+    /**
+     * Creates a new posting for a product.
+     *
+     * @param user the seller user
+     */
     private void createPosting(User user) {
-        PostingServices postingServices = new PostingServices();
         Posting posting = new Posting();
         System.out.print("Enter product ID: ");
         posting.setProductId(scanner.nextInt());
@@ -173,8 +202,10 @@ public class SellerSubMenu {
         System.out.println("Posting created successfully.");
     }
 
+    /**
+     * Updates an existing posting in the system.
+     */
     private void updatePosting() {
-        PostingServices postingServices = new PostingServices();
         System.out.print("Enter posting ID to update: ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Consume newline
@@ -208,8 +239,10 @@ public class SellerSubMenu {
         System.out.println("Posting updated successfully.");
     }
 
+    /**
+     * Deletes a posting from the system.
+     */
     private void deletePosting() {
-        PostingServices postingServices = new PostingServices();
         System.out.print("Enter posting ID to delete: ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Consume newline
