@@ -1,13 +1,20 @@
 package company;
 
-import utility.DAO;
-import utility.DBConnection;
-
+import utility.*;
 import java.sql.*;
 import java.util.ArrayList;
+
+/**
+ * Data Access Object (DAO) for the Company entity.
+ * Provides methods to perform CRUD operations on the Company table in the database.
+ */
 public class CompanyDAO implements DAO<Company> {
   private Connection connection;
 
+  /**
+   * Constructor for CompanyDAO.
+   * Initializes the database connection.
+   */
   public CompanyDAO() {
     try {
       connection = DBConnection.getConnection();
@@ -16,6 +23,11 @@ public class CompanyDAO implements DAO<Company> {
     }
   }
 
+  /**
+   * Retrieves all companies from the database.
+   *
+   * @return an ArrayList of Company objects
+   */
   public final ArrayList<Company> getAll() {
     ArrayList<Company> companies = new ArrayList<>();
     final String query = "SELECT * FROM company";
@@ -36,6 +48,12 @@ public class CompanyDAO implements DAO<Company> {
     return companies;
   }
 
+  /**
+   * Retrieves a company by its ID.
+   *
+   * @param id the ID of the company to retrieve
+   * @return the Company object with the specified ID
+   */
   public final Company getById(int id) {
     Company company = new Company();
     final String query = "SELECT * FROM company WHERE company_id = ?";
@@ -55,6 +73,12 @@ public class CompanyDAO implements DAO<Company> {
     return company;
   }
 
+  /**
+   * Inserts a new company into the database.
+   *
+   * @param company the Company object to insert
+   * @return the ID of the newly inserted company, or -1 if the insertion failed
+   */
   public final int insert(Company company) {
     final String query = "INSERT INTO company (address_id, company_name, company_phone) VALUES (?, ?, ?) RETURNING company_id";
     try {
@@ -72,6 +96,11 @@ public class CompanyDAO implements DAO<Company> {
     return -1;
   }
 
+  /**
+   * Updates an existing company in the database.
+   *
+   * @param company the Company object with updated information
+   */
   public final void update(Company company) {
     final String query = "UPDATE company SET address_id = ?, company_name = ?, company_phone = ? WHERE company_id = ?";
     try {
@@ -86,6 +115,11 @@ public class CompanyDAO implements DAO<Company> {
     }
   }
 
+  /**
+   * Deletes a company from the database.
+   *
+   * @param company the Company object to delete
+   */
   public final void delete(Company company) {
     final String query = "DELETE FROM company WHERE company_id = ?";
     try {

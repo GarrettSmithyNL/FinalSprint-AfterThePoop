@@ -1,16 +1,25 @@
 package menu;
 
-import users.User;
-import users.UserServices;
-
+import users.*;
 import java.util.Scanner;
 
+/**
+ * SubMenu class provides a menu interface for users to navigate between different submenus
+ * such as Buyer Menu, Seller Menu, and Admin Menu.
+ */
 public class SubMenu {
+
+    /**
+     * Displays the submenu and handles user input for various operations based on user role.
+     *
+     * @param userId the ID of the user
+     */
     public void subMenu(int userId) {
         boolean running = true;
         Scanner scanner = new Scanner(System.in);
         User user = new UserServices().getUserById(userId);
         System.out.println("Welcome " + user.getUserName() + "!");
+
         while (running) {
             System.out.println("Please select an option:");
             System.out.println("1. Buyer Menu");
@@ -26,10 +35,12 @@ public class SubMenu {
 
             switch (scanner.nextInt()) {
                 case 1:
-                    System.out.println("Buyer Menu");
+                    BuyerSubMenu buyerSubMenu = new BuyerSubMenu(user);
+                    buyerSubMenu.displayMenu();
                     break;
                 case 2:
-                    System.out.println("Seller Menu");
+                    SellerSubMenu sellerSubMenu = new SellerSubMenu(user);
+                    sellerSubMenu.displayMenu();
                     break;
                 case 3:
                     if (user.isAdmin()) {
@@ -59,8 +70,6 @@ public class SubMenu {
                     System.out.println("Invalid option. Please try again.");
                     break;
             }
-
         }
-
     }
 }

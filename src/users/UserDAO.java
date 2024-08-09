@@ -2,15 +2,21 @@ package users;
 
 import utility.*;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Data Access Object (DAO) for the User entity.
+ * Provides methods to perform CRUD operations on the User table in the database.
+ */
 public class UserDAO implements DAO<User> {
   // Connection to the database
   private Connection connection;
 
-  // Constructor
+  /**
+   * Constructor for UserDAO.
+   * Initializes the database connection.
+   */
   public UserDAO() {
     try {
       // Get the connection to the database
@@ -19,6 +25,12 @@ public class UserDAO implements DAO<User> {
       System.out.println("Error: " + e.getMessage());
     }
   }
+
+  /**
+   * Retrieves all users from the database.
+   *
+   * @return an ArrayList of User objects
+   */
   public final ArrayList<User> getAll() {
     // List to store users
     ArrayList<User> users = new ArrayList<>();
@@ -48,8 +60,14 @@ public class UserDAO implements DAO<User> {
     return users;
   }
 
+  /**
+   * Retrieves a user by its ID.
+   *
+   * @param id the ID of the user to retrieve
+   * @return the User object with the specified ID
+   */
   public final User getById(int id) {
-    // users.User object to store the result
+    // User object to store the result
     User user = new User();
     // SQL query to get a user by id
     final String query = "SELECT * FROM users WHERE user_id = ?";
@@ -75,6 +93,12 @@ public class UserDAO implements DAO<User> {
     return user;
   }
 
+  /**
+   * Inserts a new user into the database.
+   *
+   * @param user the User object to insert
+   * @return the ID of the newly inserted user, or -1 if the insertion failed
+   */
   public final int insert(User user) {
     // SQL query to insert a user into the database
     final String query = "INSERT INTO users (address_id, company_id, user_name, email, password, user_phone, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING user_id";
@@ -98,6 +122,11 @@ public class UserDAO implements DAO<User> {
     return -1;
   }
 
+  /**
+   * Updates an existing user in the database.
+   *
+   * @param user the User object with updated information
+   */
   public final void update(User user) {
     // SQL query to update a user in the database
     final String query = "UPDATE users SET address_id = ?, company_id = ?, user_name = ?, email = ?, password = ?, user_phone = ?, is_admin = ? WHERE user_id = ?";
@@ -118,6 +147,11 @@ public class UserDAO implements DAO<User> {
     }
   }
 
+  /**
+   * Deletes a user from the database.
+   *
+   * @param user the User object to delete
+   */
   public final void delete(User user) {
     // SQL query to delete a user from the database
     final String query = "DELETE FROM users WHERE user_id = ?";
@@ -131,6 +165,12 @@ public class UserDAO implements DAO<User> {
     }
   }
 
+  /**
+   * Retrieves a user by its email.
+   *
+   * @param email the email of the user to retrieve
+   * @return the User object with the specified email
+   */
   public User getByEmail(String email) {
     User user = null;
     final String query = "SELECT * FROM users WHERE email = ?";

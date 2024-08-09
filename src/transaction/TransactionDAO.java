@@ -4,9 +4,19 @@ import utility.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+/**
+ * Data Access Object (DAO) for the Transaction entity.
+ * Provides methods to perform CRUD operations on the Transaction table in the database.
+ */
 public class TransactionDAO implements DAO<Transaction> {
+  // Connection to the database
   private Connection connection;
 
+  /**
+   * Constructor for TransactionDAO.
+   * Initializes the database connection.
+   */
   public TransactionDAO() {
     try {
       connection = DBConnection.getConnection();
@@ -15,6 +25,11 @@ public class TransactionDAO implements DAO<Transaction> {
     }
   }
 
+  /**
+   * Retrieves all transactions from the database.
+   *
+   * @return an ArrayList of Transaction objects
+   */
   public final ArrayList<Transaction> getAll() {
     ArrayList<Transaction> transactions = new ArrayList<>();
     final String query = "SELECT * FROM transactions";
@@ -37,6 +52,12 @@ public class TransactionDAO implements DAO<Transaction> {
     return transactions;
   }
 
+  /**
+   * Retrieves a transaction by its ID.
+   *
+   * @param id the ID of the transaction to retrieve
+   * @return the Transaction object with the specified ID
+   */
   public final Transaction getById(int id) {
     Transaction transaction = new Transaction();
     final String query = "SELECT * FROM transactions WHERE transaction_id = ?";
@@ -58,6 +79,12 @@ public class TransactionDAO implements DAO<Transaction> {
     return transaction;
   }
 
+  /**
+   * Inserts a new transaction into the database.
+   *
+   * @param transaction the Transaction object to insert
+   * @return the ID of the newly inserted transaction, or -1 if the insertion failed
+   */
   public final int insert(Transaction transaction) {
     final String query = "INSERT INTO transactions (buyer_id, seller_id, product_id, quantity, price) VALUES (?, ?, ?, ?, ?) RETURNING transaction_id";
     try {
@@ -77,6 +104,11 @@ public class TransactionDAO implements DAO<Transaction> {
     return -1;
   }
 
+  /**
+   * Updates an existing transaction in the database.
+   *
+   * @param transaction the Transaction object with updated information
+   */
   public final void update(Transaction transaction) {
     final String query = "UPDATE transactions SET buyer_id = ?, seller_id = ?, product_id = ?, quantity = ?, price = ? WHERE transaction_id = ?";
     try {
@@ -93,6 +125,11 @@ public class TransactionDAO implements DAO<Transaction> {
     }
   }
 
+  /**
+   * Deletes a transaction from the database.
+   *
+   * @param transaction the Transaction object to delete
+   */
   public final void delete(Transaction transaction) {
     final String query = "DELETE FROM transactions WHERE transaction_id = ?";
     try {

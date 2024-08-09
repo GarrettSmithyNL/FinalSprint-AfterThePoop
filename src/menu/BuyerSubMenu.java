@@ -1,26 +1,45 @@
 package menu;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
-import posting.Posting;
-import posting.PostingServices;
-import transaction.Transaction;
-import transaction.TransactionServices;
+
+import company.*;
+import posting.*;
+import product.*;
+import transaction.*;
 import users.*;
 
+/**
+ * BuyerSubMenu class provides a menu interface for buyer users to view postings and purchase products.
+ */
 public class BuyerSubMenu {
-    private final PostingServices postingServices;
-    private final TransactionServices transactionService;
     private final User buyer;
     private final Scanner scanner;
+    private final PostingServices postingServices;
+    private final ProductService productService;
+    private final UserServices userServices;
+    private final CompanyServices companyServices;
+    private final TransactionServices transactionService;
 
-    public BuyerSubMenu(PostingServices postingServices, TransactionServices transactionService, User buyer) {
-        this.postingServices = postingServices;
-        this.transactionService = transactionService;
+    /**
+     * Constructor for BuyerSubMenu.
+     * Initializes the services and scanner.
+     *
+     * @param buyer the buyer user
+     */
+    public BuyerSubMenu(User buyer) {
+        this.postingServices = new PostingServices();
+        this.productService = new ProductService();
+        this.userServices = new UserServices();
+        this.companyServices = new CompanyServices();
+        this.transactionService = new TransactionServices();
         this.buyer = buyer;
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Displays the buyer submenu and handles user input for various buyer operations.
+     */
     public void displayMenu() {
         int choice;
         do {
@@ -34,7 +53,7 @@ public class BuyerSubMenu {
 
             switch (choice) {
                 case 1:
-                    seeAllPostings();
+                    viewAllPostings();
                     break;
                 case 2:
                     purchaseProduct();
@@ -48,14 +67,24 @@ public class BuyerSubMenu {
         } while (choice != 3);
     }
 
-    private void seeAllPostings() {
-        List<Posting> postings = postingServices.seeAvailablePostings();
-        System.out.println("Postings:");
+    /**
+     * Displays all postings available for purchase.
+     */
+    private void viewAllPostings() {
+        ArrayList<Posting> postings = postingServices.seeAvailablePostings();
+        System.out.printf("--------------------------------------------------------------------------------%n");
+        System.out.printf(" ID |             Name             |  Quantity  |  Price  |        Company      %n");
+        System.out.printf("--------------------------------------------------------------------------------%n");
         for (Posting posting : postings) {
-            System.out.println("ID: " + posting.getPostingId() + ", Product ID: " + posting.getProductId() +
-                    ", Quantity: " + posting.getQuantity() + ", Price: " + posting.getPrice());
+            Product product = productService.getProductById(posting.getProductId());
+            Company company = companyServices.getCompanyById(userServices.getUserById(posting.getSellerId()).getCompanyId());
+            System.out.printf("%4d|%30S|%8d LBS|$%8.2f|%21S%n", posting.getPostingId(), product.getProduct_name(), posting.getQuantity(), posting.getPrice(), company.getCompanyName());
         }
     }
+
+    /**
+     * Handles the purchase of a product by the buyer.
+     */
     private void purchaseProduct() {
         System.out.print("Enter posting ID to purchase: ");
         int postingId = scanner.nextInt();
